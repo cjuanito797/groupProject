@@ -6,6 +6,14 @@ from .models import Item
 
 
 # Create your views here.
+def home(request):
+    num_items = Item.objects.all().count()
+    context = {
+        'num_items' : num_items
+    }
+    # Render the html template home.html with the data in the context variable
+    return render(request, 'home.html', context=context)
+
 class ItemListView(ListView):
     queryset = Item.objects.all()
     context_object_name = 'foods'
