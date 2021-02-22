@@ -1,5 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
+import random
+
+
+def create_new_ref_number():
+    return str(random.randint(100000, 999999))
 
 # Create your models here.
 class Item(models.Model):
@@ -12,6 +17,7 @@ class Item(models.Model):
         """String for representing an item"""
         return f'{self.name} ({self.id})'
 
+
 class Customer(models.Model):
     firstName = models.CharField(max_length=35)
     lastName = models.CharField(max_length=35)
@@ -23,8 +29,16 @@ class Customer(models.Model):
         """String for representing the customer"""
         return f'{self.firstName} {self.lastName} ({self.id})'
 
+
 class Order(models.Model):
-    id = models.CharField(max_length=6, unique=True, primary_key=True)
+    id = models.CharField(
+        primary_key=True,
+        max_length=6,
+        blank=True,
+        editable=False,
+        unique=True,
+        default=create_new_ref_number()
+    )
     orderQty = models.CharField(max_length=100)
     order_date = models.DateTimeField(auto_now=True)
     deliveryChoices = (
@@ -42,4 +56,5 @@ class Order(models.Model):
 
     def __str__(self):
         """String representation for an order object"""
-        return f'{self.customer.firstName}, {self.customer.lastName}, {self.customer.customer_phone}'
+        return f'{self.customer.firstName}, {self.customer.lastName}, {self.customer.customer_phone}, ' \
+               f'{self.id}'
