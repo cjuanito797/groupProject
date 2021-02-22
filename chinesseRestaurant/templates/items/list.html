@@ -5,6 +5,12 @@
     <title>Our Items</title>
 </head>
 <body>
+<ul class="nav navbar-nav">
+    <a href="{% url 'chinesseRestaurant:item_list' %}">Foods</a>
+    <a href="{% url 'chinesseRestaurant:home' %}">Home</a>
+    <a href="{% url 'chinesseRestaurant:home' %}">About</a>
+    <a href="{% url 'chinesseRestaurant:home' %}">Contact</a>
+</ul>
 <h1>Our Delicious Entrees</h1>
 {% for food in foods %}
 <h2>
