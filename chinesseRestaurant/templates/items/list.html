@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Items</title>
+</head>
+<body>
+<h1>Our Delicious Entrees</h1>
+{% for food in foods %}
+<h2>
+
+    <br><br>{{ food.name }}<br>
+    Price: ${{ food.price }}
+</h2>
+{% endfor %}
+</body>
+</html>
