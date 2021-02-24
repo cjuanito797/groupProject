@@ -13,6 +13,10 @@ class Item(models.Model):
     quantity = models.IntegerField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.CharField(max_length=140, default='Product Description')
+    objects = models.Manager()
+
+    class Meta:
+        ordering = ('-name', )
 
     def __str__(self):
         """String for representing an item"""
