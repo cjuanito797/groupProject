@@ -21,7 +21,7 @@ class Item(models.Model):
 
     def __str__(self):
         """String for representing an item"""
-        return f'{self.name} ({self.id})'
+        return f'{self.name} ({self.id}, {"photo":photo})'
 
 
 class Customer(models.Model):
