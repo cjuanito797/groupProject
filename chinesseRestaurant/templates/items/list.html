@@ -26,10 +26,12 @@
 
 
     {% for food in foods %}
+        <div class="foodDesc">
         <h2>{{ food.name }}</h2>
         <p>${{ food.price }}</p>
         <p>{{ food.description }}</p>
         <img src="{% static "images/spicyChicken.jpg" %}" width="500" height="500"  alt="panda"/>
+        </div>
     {% endfor %}
 
 {% if is_paginated %}
