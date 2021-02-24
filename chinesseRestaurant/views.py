@@ -1,9 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView
 
-from .models import Item, Order
-from django.core.paginator import Paginator, EmptyPage, \
-    PageNotAnInteger
+from .models import Item, Order, Category
 
 
 class ItemListView(ListView):
@@ -14,23 +12,20 @@ class ItemListView(ListView):
     template_name = 'items/list.html'
 
 
-def item_list(request):
-    object_list = Item.objects.get_queryset().order_by('name')
-    paginator = Paginator(object_list, 3)  # 2 foods per page
-    page = request.GET.get('page')
-    try:
-        foods = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer deliver the first page
-        foods = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range deliver last page of results
-        foods = paginator.page(paginator.num_pages)
+def item_list(request, category_slug=None):
+    category = None
+    categories = Category.objects.all()
+    items = Item.objects.fitler(available=True)
+
+    if category_slug:
+        category = get_object_or_404(Category, slug=category_slug)
+        items = items.filter(category=category)
 
     return render(request,
                   'items/list.html',
-                  {'page': page,
-                   'foods': foods})
+                  {'category' : category,
+                   'categories' : categories,
+                   'items' : items})
 
 
 # Create your views here.
