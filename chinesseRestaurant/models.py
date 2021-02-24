@@ -14,6 +14,7 @@ class Item(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.CharField(max_length=140, default='Product Description')
     objects = models.Manager()
+    photo = models.ImageField(upload_to='images', null=True)
 
     class Meta:
         ordering = ('-name', )
