@@ -2,12 +2,12 @@
 {% load static %}
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+    <meta charset="utf-8">
 
-  <title>The HTML5 Herald</title>
+    <title>Our Foods</title>
     <link rel="stylesheet" type="text/css" href="../../static/css/main.css">
     <style>
-        h2{
+        h2 {
             color: lightcoral;
         }
 
@@ -17,7 +17,7 @@
 </head>
 
 <body>
-  <ul class="nav navbar-nav">
+<ul class="nav navbar-nav">
     <a href="{% url 'chinesseRestaurant:item_list' %}">Foods</a>
     <a href="{% url 'chinesseRestaurant:home' %}">Home</a>
     <a href="{% url 'chinesseRestaurant:home' %}">About</a>
@@ -25,35 +25,36 @@
 </ul>
 
 
-    {% for food in foods %}
-        <div class="foodDesc">
+{% for food in foods %}
+    <div class="foodDesc">
         <h2>{{ food.name }}</h2>
         <p>${{ food.price }}</p>
         <p>{{ food.description }}</p>
-        <img src="{% static "images/spicyChicken.jpg" %}" width="500" height="500"  alt="panda"/>
-        </div>
-    {% endfor %}
+        <img src="{% if food.image %}{{ food.image.url }}{% else %}{% static "images/logo1.jpg" %}{% endif %}">
+
+    </div>
+{% endfor %}
 
 {% if is_paginated %}
-  <ul class="pagination">
-    {% if page_obj.has_previous %}
-      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
-    {% else %}
-      <li class="disabled"><span>&laquo;</span></li>
-    {% endif %}
-    {% for i in paginator.page_range %}
-      {% if page_obj.number == i %}
-        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-      {% else %}
-        <li><a href="?page={{ i }}">{{ i }}</a></li>
-      {% endif %}
-    {% endfor %}
-    {% if page_obj.has_next %}
-      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
-    {% else %}
-      <li class="disabled"><span>&raquo;</span></li>
-    {% endif %}
-  </ul>
+    <ul class="pagination">
+        {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+            <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in paginator.page_range %}
+            {% if page_obj.number == i %}
+                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+            {% else %}
+                <li><a href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+        {% else %}
+            <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+    </ul>
 {% endif %}
 </body>
 </html>
