@@ -14,14 +14,16 @@ class Item(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.CharField(max_length=140, default='Product Description')
     objects = models.Manager()
-    photo = models.ImageField(upload_to='images', null=True)
+    image = models.ImageField(upload_to='products/%Y/%m/%d',
+                              blank=True)
+    category = models.CharField(max_length=30, default='Item Category')
 
     class Meta:
         ordering = ('-name', )
 
     def __str__(self):
         """String for representing an item"""
-        return f'{self.name} ({self.id}, {"photo":photo})'
+        return f'{self.name} ({self.id})'
 
 
 class Customer(models.Model):
