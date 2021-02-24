@@ -5,5 +5,8 @@ app_name = 'chinesseRestaurant'
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('foods/', views.ItemListView.as_view(), name='item_list')
+    path('foods/', views.item_list, name='item_list'),
+    path('<slug:category_slug>/', views.item_list,
+         name='item_list'),
+
 ]
