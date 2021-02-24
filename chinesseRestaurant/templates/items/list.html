@@ -8,7 +8,11 @@
     </title>
     <link rel="stylesheet" type="text/css" href="../../static/css/main.css">
     <style>
-        h2 {
+        h3 {
+            color: lightcoral;
+        }
+
+        p {
             color: lightcoral;
         }
 
@@ -19,6 +23,12 @@
 
 <body>
 
+<div id="navigation">
+    <a href="{% url 'chinesseRestaurant:item_list' %}">Foods</a>
+    <a href="{% url 'chinesseRestaurant:home' %}">Home</a>
+    <a href="{% url 'chinesseRestaurant:home' %}">About</a>
+    <a href="{% url 'chinesseRestaurant:home' %}">Contact</a>
+</div>
 <div id="sidebar">
     <h3>Categories</h3>
     <ul>
@@ -28,46 +38,22 @@
         {% for c in categories %}
             <li {% if category.slug == c.slug %}class="selected"{% endif %}>
                 <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+
             </li>
         {% endfor %}
     </ul>
 </div>
-
-{% for c in categories %}
-    <p>{{ c }}</p>
-{% endfor %}
-
-{% for food in foods %}
-    <div class="foodDesc">
-        <h2>{{ food.name }}</h2>
-        <p>${{ food.price }}</p>
-        <p>{{ food.description }}</p>
-        <img src="{% if food.image %}{{ food.image.url }}{% else %}{% static "images/logo1.jpg" %}{% endif %}"
-             alt="panda" width="500" height="400">
-
-    </div>
-{% endfor %}
-
-{% if is_paginated %}
-    <ul class="pagination">
-        {% if page_obj.has_previous %}
-            <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
-        {% else %}
-            <li class="disabled"><span>&laquo;</span></li>
-        {% endif %}
-        {% for i in paginator.page_range %}
-            {% if page_obj.number == i %}
-                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-            {% else %}
-                <li><a href="?page={{ i }}">{{ i }}</a></li>
-            {% endif %}
-        {% endfor %}
-        {% if page_obj.has_next %}
-            <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
-        {% else %}
-            <li class="disabled"><span>&raquo;</span></li>
-        {% endif %}
-    </ul>
-{% endif %}
+<div id="main" class="product-list">
+    <h1>{% if category %}{{ category.name }}{% else %}Foods{% endif %}</h1>
+    {% for product in items %}
+        <div class="item">
+            <h3>{{ product.name }}</h3>
+            <p>${{ product.price }}</p>
+            <p>{{ product.description }}</p>
+            <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}"
+                 alt="panda" width="500" height="500">
+        </div>
+    {% endfor %}
+</div>
 </body>
 </html>
