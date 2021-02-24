@@ -17,13 +17,13 @@ def home(request):
 class ItemListView(ListView):
     queryset = Item.objects.all()
     context_object_name = 'foods'
-    paginate_by = 3
+    paginate_by = 5
     template_name = 'items/list.html'
 
 
 def item_list(request):
     object_list = Item.objects.all()
-    paginator = Paginator(object_list, 3)  # 3 foods per page
+    paginator = Paginator(object_list, 5)  # 5 foods per page
     page = request.GET.get('page')
     try:
         foods = paginator.page(page)
