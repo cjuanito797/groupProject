@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
-
     <title>  {% if category %}{{ category.name }}{% else %}Products{% endif %}
     </title>
     <link rel="stylesheet" type="text/css" href="../../static/css/main.css">
@@ -15,12 +15,8 @@
         p {
             color: lightcoral;
         }
-
-
     </style>
-
 </head>
-
 <body>
 
 <div id="navigation">
@@ -29,6 +25,7 @@
     <a href="{% url 'chinesseRestaurant:home' %}">About</a>
     <a href="{% url 'chinesseRestaurant:home' %}">Contact</a>
 </div>
+
 <div id="sidebar">
     <h3>Categories</h3>
     <ul>
@@ -41,8 +38,11 @@
 
             </li>
         {% endfor %}
+
     </ul>
+
 </div>
+
 <div id="main" class="product-list">
     <h1>{% if category %}{{ category.name }}{% else %}Foods{% endif %}</h1>
     {% for product in items %}
