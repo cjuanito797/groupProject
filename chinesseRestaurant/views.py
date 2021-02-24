@@ -17,7 +17,7 @@ class ItemListView(ListView):
 def item_list(request):
     object_list = Item.objects.get_queryset().order_by('name')
     paginator = Paginator(object_list, 3)  # 2 foods per page
-    page = request.GET.get('page', 1)
+    page = request.GET.get('page')
     try:
         foods = paginator.page(page)
     except PageNotAnInteger:
