@@ -30,7 +30,7 @@
         <h2>{{ food.name }}</h2>
         <p>${{ food.price }}</p>
         <p>{{ food.description }}</p>
-        <img src="{% if food.image %}{{ food.image.url }}{% else %}{% static "images/logo1.jpg" %}{% endif %}">
+        <img src="{% if food.image %}{{ food.image.url }}{% else %}{% static "images/logo1.jpg" %}{% endif %}" alt="panda" width="500" height="400">
 
     </div>
 {% endfor %}
