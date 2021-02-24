@@ -40,6 +40,16 @@
 a:hover{
     color: hotpink;
   }
+
+img {
+  border-radius: 50%;
+
+}
+
+h2
+{
+  color: blue;
+}
 /*
 This is a comment
 */
