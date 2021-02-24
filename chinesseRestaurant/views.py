@@ -1,22 +1,23 @@
 from django.shortcuts import render
 from django.views.generic import ListView
 
-from .models import Item
+from .models import Item, Order
 from django.core.paginator import Paginator, EmptyPage, \
     PageNotAnInteger
 
 
 class ItemListView(ListView):
+    model = Item
     queryset = Item.objects.get_queryset().order_by('name')
     context_object_name = 'foods'
-    paginate_by = 2
+    paginate_by = 3
     template_name = 'items/list.html'
 
 
 def item_list(request):
     object_list = Item.objects.get_queryset().order_by('name')
-    paginator = Paginator(object_list, 2)  # 2 foods per page
-    page = request.GET.get('page')
+    paginator = Paginator(object_list, 3)  # 2 foods per page
+    page = request.GET.get('page', 1)
     try:
         foods = paginator.page(page)
     except PageNotAnInteger:
@@ -25,6 +26,7 @@ def item_list(request):
     except EmptyPage:
         # If page is out of range deliver last page of results
         foods = paginator.page(paginator.num_pages)
+
     return render(request,
                   'items/list.html',
                   {'page': page,
@@ -33,9 +35,9 @@ def item_list(request):
 
 # Create your views here.
 def home(request):
-    num_items = Item.objects.all().count()
+    num_orders = Order.objects.all()
     context = {
-        'num_items': num_items
+        'num_orders': num_orders
     }
     # Render the html template home.html with the data in the context variable
     return render(request, 'home.html', context=context)
