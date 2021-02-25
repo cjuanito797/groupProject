@@ -21,7 +21,7 @@ from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('chineeseRestaurant/', include('chinesseRestaurant.urls', namespace='chinesseRestaurant'))
+    path('chinesseRestaurant/', include('chinesseRestaurant.urls', namespace='chinesseRestaurant'))
 ]
 
 
