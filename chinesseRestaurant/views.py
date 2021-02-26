@@ -18,7 +18,6 @@ def item_list(request, category_slug=None):
                    'categories': categories,
                    'items': items})
 
-
 # Create your views here.
 def home(request):
     num_orders = Order.objects.all()
