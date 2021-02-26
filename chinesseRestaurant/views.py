@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-
+from .forms import SignUp
 from .models import Item, Order, Category
 
 
@@ -14,9 +14,9 @@ def item_list(request, category_slug=None):
 
     return render(request,
                   'items/list.html',
-                  {'category' : category,
-                   'categories' : categories,
-                   'items' : items})
+                  {'category': category,
+                   'categories': categories,
+                   'items': items})
 
 
 # Create your views here.
@@ -27,3 +27,10 @@ def home(request):
     }
     # Render the html template home.html with the data in the context variable
     return render(request, 'home.html', context=context)
+
+
+def signup(request):
+    signup_form = SignUp()
+    return render(request,
+                  'Registration/signup.html',
+                    {'signup_form': signup_form})
