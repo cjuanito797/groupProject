@@ -51,3 +51,5 @@ def order_now(request):
 
 def covidWarning(request):
     return render(request, 'covidPrec.html')
+
+
