@@ -53,24 +53,9 @@ class Item(models.Model):
                        args=[self.id, self.slug])
 
 
-class Customer(models.Model):
-    firstName = models.CharField(max_length=35)
-    lastName = models.CharField(max_length=35)
-    address = models.CharField(max_length=100)
-    id = models.CharField(
-        primary_key=True,
-        max_length=6,
-        blank=True,
-        editable=False,
-        unique=True,
-        default=create_new_ref_number()
-    )
-    customer_phone = models.CharField(max_length=10)
-    email = models.EmailField(default='someEmail')
-
-    def __str__(self):
-        """String for representing the customer"""
-        return f'{self.firstName} {self.lastName} ({self.id})'
+class Customer(User):
+    class Meta:
+        proxy = True
 
 
 class Order(models.Model):
