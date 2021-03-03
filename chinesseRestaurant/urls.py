@@ -10,5 +10,6 @@ urlpatterns = [
     path('foods/', views.item_list, name='item_list'),
     path('<slug:category_slug>/', views.item_list,
          name='item_list'),
+    path('order_now/', views.order_now, name='order_now'),
 
 ]

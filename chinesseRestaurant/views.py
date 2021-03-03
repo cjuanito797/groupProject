@@ -46,5 +46,8 @@ def signup(request):
         form = SignUp()
     return render(request, 'registration/signup.html', {'form': form})
 
+def order_now(request):
+    return render(request, 'order_now.html')
+
 def covidWarning(request):
     return render(request, 'covidPrec.html')
