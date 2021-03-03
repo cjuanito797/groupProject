@@ -64,17 +64,22 @@
     <a href="{% url 'chinesseRestaurant:home' %}">Contact</a>
 </div>
 
-<h1>
-    Signup Below
-</h1>
-<div id="form">
-    <div id ="inner">
-    <form method="post">
-        {{ signup_form.as_p }}
-        {% csrf_token %}
-        <p><input type="submit" value="Join Now"></p>
-    </form>
-</div>
-</div>
+ <h2>Sign up</h2>
+  <form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+      <p>
+        {{ field.label_tag }}<br>
+        {{ field }}
+        {% if field.help_text %}
+          <small style="color: grey">{{ field.help_text }}</small>
+        {% endif %}
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+    {% endfor %}<br>
+    <button type="submit">Sign up</button>
+  </form>
+
 </body>
 </html>
