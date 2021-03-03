@@ -1,11 +1,17 @@
 from django import forms
-from .models import Customer
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
-class SignUp(forms.Form):
-    fName = forms.CharField(max_length=25, label='', widget=forms.TextInput(attrs={'placeholder': 'First Name'}))
-    lName = forms.CharField(max_length=25, label='', widget=forms.TextInput(attrs={'placeholder': 'Last Name'}))
-    phoneNumber = forms.CharField(max_length=10, label='', widget=forms.TextInput(attrs={'placeholder': 'Phone Number'}))
-    street_number = forms.CharField(max_length = 20, label='', widget=forms.TextInput(attrs={'placeholder': 'Street Number'}))
-    email = forms.EmailField(label='', widget=forms.TextInput(
-        attrs={'type': 'email',
-               'placeholder': 'E-mail address'}))
+
+class SignUp(UserCreationForm):
+    first_name = forms.CharField(max_length=30, required=True, help_text='')
+    last_name = forms.CharField(max_length=30, required=True, help_text='Optional.')
+    phoneNumber = forms.CharField(max_length=10, help_text='', required=True,
+                                  widget=forms.TextInput(attrs={'placeholder': 'Phone Number'}))
+    street_number = forms.CharField(max_length=20, help_text='', required=True,
+                                    widget=forms.TextInput(attrs={'placeholder': 'Street Number'}))
+    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
+
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
