@@ -1,6 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from .forms import SignUp
-from .models import Item, Order, Category
+from .models import Item, Order, Category, Customer
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect
 
 
 def item_list(request, category_slug=None):
@@ -29,10 +32,19 @@ def home(request):
 
 
 def signup(request):
-    signup_form = SignUp()
-    return render(request,
-                  'Registration/signup.html',
-                    {'signup_form': signup_form})
+    if request.method == 'POST':
+        form = SignUp(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+
+            login(request, user)
+            return redirect('chinesseRestaurant:home')
+    else:
+        form = SignUp()
+    return render(request, 'registration/signup.html', {'form': form})
 
 def covidWarning(request):
     return render(request, 'covidPrec.html')
