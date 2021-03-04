@@ -1,9 +1,12 @@
-from django.shortcuts import render, get_object_or_404
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
+from django.shortcuts import render
+
+from .forms import LoginForm
 from .forms import SignUp
-from .models import Item, Order, Category, Customer
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect
+from .models import Item, Order, Category
 
 
 def item_list(request, category_slug=None):
@@ -20,6 +23,7 @@ def item_list(request, category_slug=None):
                   {'category': category,
                    'categories': categories,
                    'items': items})
+
 
 # Create your views here.
 def home(request):
@@ -46,10 +50,37 @@ def signup(request):
         form = SignUp()
     return render(request, 'registration/signup.html', {'form': form})
 
+
 def order_now(request):
-    return render(request, 'order_now.html')
+    return render(request, 'registration/order_now.html')
+
 
 def covidWarning(request):
     return render(request, 'covidPrec.html')
 
 
+def user_login(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            user = authenticate(request,
+                                username=cd['username'],
+                                password=cd['password'])
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return render(request, 'home.html')
+                else:
+                    return HttpResponse('Disabled account')
+            else:
+                return HttpResponse('Invalid login')
+    else:
+        form = LoginForm()
+    return render(request, 'Registration/login.html', {'form': form})
+
+
+from django.contrib.auth.decorators import login_required
+@login_required
+def customerView(request):
+    return render(request, 'base.html')
