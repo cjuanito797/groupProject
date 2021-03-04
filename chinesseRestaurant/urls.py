@@ -1,6 +1,7 @@
-from django.urls import path
-from . import views
 from django.contrib.auth import views as auth_views
+from django.urls import path
+
+from . import views
 
 app_name = 'chinesseRestaurant'
 
@@ -15,5 +16,6 @@ urlpatterns = [
     path('<slug:category_slug>/', views.item_list,
          name='item_list'),
     path('order_now/', views.order_now, name='order_now'),
+    path('customerView/edit/', views.edit, name='edit'),
 
 ]
