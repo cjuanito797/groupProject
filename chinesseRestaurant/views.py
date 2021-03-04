@@ -3,10 +3,10 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import render
-
+from .models import Profile
 from .forms import LoginForm
 from .forms import SignUp
-from .models import Item, Order, Category
+from .models import Item, Order, Category, Profile
 
 
 def item_list(request, category_slug=None):
@@ -39,12 +39,16 @@ def signup(request):
     if request.method == 'POST':
         form = SignUp(request.POST)
         if form.is_valid():
+            # Create a new user object but avoid saving it yeet
+            new_user = form.save(commit=False)
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
-
+            new_user.save()
+            Profile.objects.create(user=new_user)
             login(request, user)
+            Profile.objects.create(user=new_user)
             return redirect('chinesseRestaurant:home')
     else:
         form = SignUp()
@@ -52,6 +56,7 @@ def signup(request):
 
 
 def order_now(request):
+
     return render(request, 'registration/order_now.html')
 
 
@@ -83,4 +88,29 @@ def user_login(request):
 from django.contrib.auth.decorators import login_required
 @login_required
 def customerView(request):
+
     return render(request, 'base.html')
+
+from .forms import LoginForm, SignUp, \
+                   UserEditForm, ProfileEditForm
+@login_required
+def edit(request):
+    if request.method == 'POST':
+        user_form = UserEditForm(instance=request.user,
+                                 data=request.POST)
+        profile_form = ProfileEditForm(
+                                    instance=request.user.profile,
+                                    data=request.POST,
+                                    files=request.FILES)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            return render(request, 'base.html')
+    else:
+        user_form = UserEditForm(instance=request.user)
+        profile_form = ProfileEditForm(
+                                    instance=request.user.profile)
+    return render(request,
+                  'account/edit.html',
+                  {'user_form': user_form,
+                   'profile_form': profile_form})
