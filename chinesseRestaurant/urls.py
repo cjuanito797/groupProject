@@ -17,5 +17,6 @@ urlpatterns = [
          name='item_list'),
     path('order_now/', views.order_now, name='order_now'),
     path('customerView/edit/', views.edit, name='edit'),
+    path('menu', views.menu, name='menu'),
 
 ]
