@@ -2,9 +2,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>{% block title %}{% endblock %}</title>
-  <link href="{% static "css/main.css" %}" rel="stylesheet">
-<meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link href="{% static "css/main.css" %}" rel="stylesheet">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -13,7 +13,7 @@
         /* Remove the navbar's default margin-bottom and rounded borders */
         .navbar {
 
-        margin-bottom: 0;
+            margin-bottom: 0;
             border-radius: 0;
         }
 
@@ -51,33 +51,34 @@
 </head>
 <body>
 <ul class="nav navbar-nav navbar-right">
-                {% if user.is_authenticated %}
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="{% url 'chinesseRestaurant:logout' %}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
-                        </ul>
-                    </li>
-                {% else %}
-                    <li><a href="{% url 'chinesseRestaurant:user_login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                {% endif %}
+    {% if user.is_authenticated %}
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="{% url 'chinesseRestaurant:item_list' %}"><i class="fa fa-btn fa-sign-out"></i>Foods</a>
+                </li>
+                <li><a href="{% url 'chinesseRestaurant:logout' %}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
             </ul>
+        </li>
+    {% else %}
+        <li><a href="{% url 'chinesseRestaurant:user_login' %}"><span class="glyphicon glyphicon-log-in"></span>
+            Login</a></li>
+    {% endif %}
+</ul>
 <h3>Welcome, {{ user.username }}</h3>
-  <div id="content">
+
+<div id="content">
     {% block content %}
     {% endblock %}
-  </div>
-  <div id="sidebar">
-  </div>
+</div>
+<div id="sidebar">
+</div>
 <br><br>
 <ul class="nav navbar-nav">
+    <a href="{% url 'chinesseRestaurant:edit' %}">Edit Account</a>
     <a href="{% url 'chinesseRestaurant:item_list' %}">Foods</a>
-    <a href="{% url 'chinesseRestaurant:home' %}">Home</a>
-    <a href="{% url 'chinesseRestaurant:home' %}">About</a>
-    <a href="{% url 'chinesseRestaurant:home' %}">Contact</a>
-    <a href="{% url 'chinesseRestaurant:home' %}">Menu</a>
 </ul>
 
 <div id="banner">
@@ -86,9 +87,10 @@
 </div>
 
 <div id="logo">
-    <img src="{% static "images/logo1.jpg" %}" alt="panda"/>
 </div>
 
 
+<h3>If you submitted an order we would deliver to the following location</h3>
+{{ user.Profile.zipcode }}
 </body>
 </html>
