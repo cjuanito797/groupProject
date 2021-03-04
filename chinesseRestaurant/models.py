@@ -1,7 +1,7 @@
-from django.db import models
-from django.contrib.auth.models import User
 import random
 
+from django.contrib.auth.models import User
+from django.db import models
 from django.urls import reverse
 
 
@@ -53,9 +53,9 @@ class Item(models.Model):
                        args=[self.id, self.slug])
 
 
-class Customer(User):
-    class Meta:
-        proxy = True
+class Customer(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    address = models.CharField(max_length=100)
 
 
 class Order(models.Model):
@@ -84,5 +84,4 @@ class Order(models.Model):
 
     def __str__(self):
         """String representation for an order object"""
-        return f'{self.customer.firstName}, {self.customer.lastName}, {self.customer.customer_phone}, ' \
-               f'{self.id}'
+        return f'{self.id}'
