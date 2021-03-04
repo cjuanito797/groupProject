@@ -56,7 +56,6 @@ def signup(request):
 
 
 def order_now(request):
-
     return render(request, 'registration/order_now.html')
 
 
@@ -86,22 +85,26 @@ def user_login(request):
 
 
 from django.contrib.auth.decorators import login_required
+
+
 @login_required
 def customerView(request):
-
     return render(request, 'base.html')
 
+
 from .forms import LoginForm, SignUp, \
-                   UserEditForm, ProfileEditForm
+    UserEditForm, ProfileEditForm
+
+
 @login_required
 def edit(request):
     if request.method == 'POST':
         user_form = UserEditForm(instance=request.user,
                                  data=request.POST)
         profile_form = ProfileEditForm(
-                                    instance=request.user.profile,
-                                    data=request.POST,
-                                    files=request.FILES)
+            instance=request.user.profile,
+            data=request.POST,
+            files=request.FILES)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
@@ -109,7 +112,7 @@ def edit(request):
     else:
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(
-                                    instance=request.user.profile)
+            instance=request.user.profile)
     return render(request,
                   'account/edit.html',
                   {'user_form': user_form,
