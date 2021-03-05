@@ -70,7 +70,7 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def customerView(request):
-    return render(request, 'account/../media/users/2021/03/05/base.html')
+    return render(request, 'account/base.html')
 
 
 from .forms import UserEditForm, ProfileEditForm
@@ -90,7 +90,7 @@ def edit(request):
             profile_form.save()
             messages.success(request, 'Profile updated ' \
                                       'successfully')
-            return render(request, 'account/../media/users/2021/03/05/base.html')
+            return render(request, 'account/base.html')
         else:
             messages.error(request, 'Error updating your profile')
     else:
