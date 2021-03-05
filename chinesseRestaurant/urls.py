@@ -7,17 +7,17 @@ app_name = 'chinesseRestaurant'
 
 urlpatterns = [
     path('', views.covidWarning, name='covidWarning'),
-    re_path(r'^home/$', views.home, name='home'),
+    re_path('home/', views.home, name='home'),
     path('customerView/', views.customerView, name='customerView'),
-    #path('home/', views.home, name='home'),
-    path('signup/', views.signup, name='signup'),
+    # path('signup/', views.signup, name='signup'),
+    path('register/', views.register, name='register'),
     path('login/', auth_views.LoginView.as_view(), name='user_login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('foods/', views.item_list, name='item_list'),
-    path('<slug:category_slug>/', views.item_list,
+    path('foods/<slug:category_slug>/', views.item_list,
          name='item_list'),
-    path('home/orderNow/', views.order_now, name='order_now'),
-    path('customerView/edit/', views.edit, name='edit'),
-    path('menu', views.menu, name='menu'),
+    path('orderNow/', views.order_now, name='order_now'),
+    path('menu/', views.menu, name='menu'),
+    path('edit/', views.edit, name='edit'),
 
 ]
