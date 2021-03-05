@@ -3,25 +3,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <style>
-
-        a{
-            text-decoration: none;
-            color: black;
-            border-radius: 5px;
-            margin-left: 5px;
-            background-color: lightblue;
-            top: 10px;
-            font-size: 25px;
-        }
-    </style>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COVID AGREEMENT BUTTON</title>
+    <link rel="stylesheet" href="../static/css/COVID.css">
 </head>
 <body>
-<h1>Covid!</h1>
 
-    <a href="{% url 'chinesseRestaurant:home' %}">Agree</a>
+<header>
+    <div>
+        <div id="title">Hello Customer!</div>
+        <div id="titlebottom">
+            Welcome to our restaurant! We are committed to providing the best foods and the best service for you.
+            Hope you can enjoy our foods and service! Because of the COVID pandemic, we only serve pick-up now.
+            Sorry for the inconvenience! Stay safe and have a good day!
+        </div>
+    </div>
+</header>
+
+<a href="javascript:;">Agree!</a>
+<a href="{% url 'chinesseRestaurant:home' %}">Agree!</a>
+
 
 </body>
 </html>
