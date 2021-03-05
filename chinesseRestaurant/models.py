@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 
+
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
                                 on_delete=models.CASCADE)
@@ -15,9 +16,9 @@ class Profile(models.Model):
     state = models.CharField(max_length=2)
     zipcode = models.CharField(max_length=5)
 
-
     def __str__(self):
         return f'Profile for user {self.user.username}'
+
 
 def create_new_ref_number():
     return str(random.randint(100000, 999999))
