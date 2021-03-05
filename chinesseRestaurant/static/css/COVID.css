@@ -6,12 +6,18 @@ header{
     margin: 0 auto;
 }
 #title{
+    position: absolute;
+    top: 10%;
+    left: 38%;
     display: inline-block;
     font-size: 64px;
-    padding-top: 200px;
     margin: 0 auto;
 }
 #titlebottom{
+    position: absolute;
+    top: 30%;
+    left: 22%;
+    right: 50%;
     display: inline-block;
     box-sizing: border-box;
     width: 960px;
@@ -66,4 +72,11 @@ a:hover{
     100%{
         background-position: -400% 0;
     }
+}
+
+#button{
+    position: absolute;
+    bottom: 10%;
+    right: 50%;
+    left: 50%;
 }
