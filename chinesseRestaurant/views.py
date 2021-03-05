@@ -3,7 +3,6 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import render
-from .models import Profile
 from .forms import LoginForm
 from .forms import SignUp
 from .models import Item, Order, Category, Profile
@@ -56,7 +55,7 @@ def signup(request):
 
 
 def order_now(request):
-    return render(request, 'registration/order_now.html')
+    return render(request, 'order_now.html')
 
 
 def covidWarning(request):
@@ -106,7 +105,7 @@ def edit(request):
         user_form = UserEditForm(instance=request.user,
                                  data=request.POST)
         profile_form = ProfileEditForm(
-            instance=request.user.profile,
+            instance=request.user.Profile,
             data=request.POST,
             files=request.FILES)
         if user_form.is_valid() and profile_form.is_valid():
@@ -121,3 +120,5 @@ def edit(request):
                   'account/edit.html',
                   {'user_form': user_form,
                    'profile_form': profile_form})
+
+
