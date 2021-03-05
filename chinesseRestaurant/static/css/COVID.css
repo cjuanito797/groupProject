@@ -1,11 +1,12 @@
-header{
+header {
     color: white;
-    width:1600px;
+    width: 1600px;
     height: 900px;
     text-align: center;
     margin: 0 auto;
 }
-#title{
+
+#title {
     position: absolute;
     top: 10%;
     left: 38%;
@@ -13,7 +14,8 @@ header{
     font-size: 64px;
     margin: 0 auto;
 }
-#titlebottom{
+
+#titlebottom {
     position: absolute;
     top: 30%;
     left: 22%;
@@ -24,19 +26,30 @@ header{
     font-size: 24px;
 }
 
-*{
-    margin:0;
-    padding:0;
+#sign_up {
+    display: inline-block;
+    width: 900px;
+    height: 200px;
 }
-body{
-    background:#000;
+
+* {
+    margin: 0;
+    padding: 0;
 }
-a{
+
+body {
+    background-image: url("../images/BackGround.jpg");
+    width: 100%;
+    height: 100%;
+}
+
+a {
     text-decoration: none;
-    position:absolute;bottom: 0px;
+    position: absolute;
+    bottom: 0px;
     left: 50%;
     top: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     font-size: 24px;
     background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
     background-size: 400%;
@@ -49,12 +62,13 @@ a{
     border-radius: 50px;
     z-index: 1;
 }
-a::before{
+
+a::before {
     content: "";
     position: absolute;
     left: -5px;
     right: -5px;
-    top:-5px;
+    top: -5px;
     bottom: -5px;
     background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
     background-size: 400%;
@@ -62,19 +76,22 @@ a::before{
     filter: blur(20px);
     z-index: -1;
 }
-a:hover::before{
+
+a:hover::before {
     animation: sun 8s infinite;
 }
-a:hover{
+
+a:hover {
     animation: sun 8s infinite;
 }
+
 @keyframes sun {
-    100%{
+    100% {
         background-position: -400% 0;
     }
 }
 
-#button{
+#button {
     position: absolute;
     bottom: 10%;
     right: 50%;
