@@ -63,6 +63,10 @@ def covidWarning(request):
     return render(request, 'covidPrec.html')
 
 
+def menu(request):
+    return render(request, 'menu.html')
+
+
 def user_login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
