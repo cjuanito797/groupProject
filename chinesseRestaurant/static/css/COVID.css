@@ -8,7 +8,7 @@ header {
 
 #title {
     position: absolute;
-    top: 10%;
+    top: 20%;
     left: 38%;
     display: inline-block;
     font-size: 64px;
@@ -36,10 +36,14 @@ header {
 }
 
 body {
-    background-image: url("../images/BackGround.jpg");
-    width: 100%;
-    height: 100%;
+
+    background-image:    url(../images/BackGround.jpg);
+    background-size:     cover;                      /* <------ */
+    background-repeat:   no-repeat;
+    background-position: center center;              /* optional, center the image */
 }
+
+
 
 a {
     text-decoration: none;
@@ -94,4 +98,10 @@ a:hover {
     bottom: 10%;
     right: 50%;
     left: 50%;
+}
+
+#sign_up_button{
+    top: 12%;
+    left: 50%;
+    position: absolute;
 }
