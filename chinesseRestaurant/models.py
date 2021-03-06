@@ -7,7 +7,8 @@ from django.urls import reverse
 
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
-                                on_delete=models.CASCADE)
+                                on_delete=models.CASCADE,
+                                unique=True)
     date_of_birth = models.DateField(blank=True, null=True)
     image = models.ImageField(upload_to='users/%Y/%m/%d',
                               blank=True)
