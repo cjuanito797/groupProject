@@ -94,10 +94,13 @@ class Order(models.Model):
                                     choices=deliveryChoices,
                                     default='pickup')
 
-    customer = models.ForeignKey('Customer',
+    customer = models.ForeignKey(Profile,
                                  on_delete=models.CASCADE,
-                                 related_name='orders')
+                                 related_name='order')
 
     def __str__(self):
         """String representation for an order object"""
         return f'{self.id}'
+
+class test(models.Model):
+    test = models.CharField(max_length=10)
