@@ -90,17 +90,18 @@ class Order(models.Model):
         ('pickup', 'Pickup')
     )
 
+    customer = models.ForeignKey(Profile, db_column="Profile", on_delete=models.CASCADE)
+
     deliveryPref = models.CharField(max_length=10,
                                     choices=deliveryChoices,
                                     default='pickup')
 
-    customer = models.ForeignKey(Profile,
-                                 on_delete=models.CASCADE,
-                                 related_name='order')
+    class Meta:
+        ordering= ('id',)
+        managed=True
+
 
     def __str__(self):
         """String representation for an order object"""
         return f'{self.id}'
 
-class test(models.Model):
-    test = models.CharField(max_length=10)
