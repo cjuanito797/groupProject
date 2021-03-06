@@ -15,6 +15,10 @@ class ProfileEditForm(forms.ModelForm):
         model = Profile
         fields = ('date_of_birth', 'image', 'streetNum', 'city', 'state', 'zipcode')
 
+class DeliveryEditForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('streetNum', 'city', 'state', 'zipcode')
 
 class SignUp(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True, help_text='')
