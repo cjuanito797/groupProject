@@ -63,7 +63,7 @@
             }
         }
 
-        ul.messages{
+        ul.messages {
             background-color: lightgreen;
             height: 40px;
             list-style: none;
@@ -73,7 +73,7 @@
             top: 5%;
         }
 
-        #profilePic{
+        #profilePic {
             border-radius: 50px;
         }
     </style>
@@ -107,9 +107,10 @@
             Login</a></li>
     {% endif %}
 </ul>
-<div id ="profilePic">
-            <img src="{% if user.profile.image %}{{ user.profile.image.url }}{% else %}{% static "images/logo1.jpg" %}{% endif %}"
-                 alt="panda" width="200" height="200">
+<div id="profilePic">
+    <img src="
+            {% if user.profile.image %}{{ user.profile.image.url }}{% else %}{% static "images/logo1.jpg" %}{% endif %}"
+         alt="panda" width="200" height="200">
 </div>
 
 <h3>Welcome, {{ user.username }}</h3>
@@ -125,7 +126,7 @@
     <a href="{% url 'chinesseRestaurant:edit' %}">Edit Account</a>
     <a href="{% url 'chinesseRestaurant:item_list' %}">Foods</a>
     <a href="{% url 'chinesseRestaurant:order_now' %}">Order Now</a>
-    <a href="{% url 'chinesseRestaurant:order_now' %}">Delivery Preferences</a>
+    <a href="{% url 'chinesseRestaurant:editDeliveryPref' %}">Delivery Preferences</a>
 </ul>
 
 <div id="banner">
@@ -138,10 +139,18 @@
 
 
 <h3>If you submitted an order we would deliver to the following location</h3>
-<h4>Zipcode:  {{ user.profile.zipcode }}</h4>
-<h4>Street Number:  {{ user.profile.streetNum }}</h4>
-<h4>City:   {{ user.profile.city }}</h4>
+<h4>Zipcode: {{ user.profile.zipcode }}</h4>
+<h4>Street Number: {{ user.profile.streetNum }}</h4>
+<h4>City: {{ user.profile.city }}</h4>
 <h4>State: {{ user.profile.state }}</h4>
+
+{% ifequal user.profile.city|stringformat:"s" "" %}
+
+    <h3>Looks like we still have a a couple of things to set up</h3>
+    <a href="{% url 'chinesseRestaurant:editDeliveryPref' %}">Edit Delivery Preferences</a><br>
+    <a href="{% url 'chinesseRestaurant:edit' %}">Edit Account</a>
+
+{% endifequal %}
 
 
 </body>
