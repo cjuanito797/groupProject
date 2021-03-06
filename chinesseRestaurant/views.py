@@ -88,7 +88,7 @@ def edit(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request, 'Profile updated ' \
+            messages.success(request, 'Profile updated '
                                       'successfully')
             return render(request, 'account/base.html')
         else:
@@ -126,3 +126,30 @@ def register(request):
     return render(request,
                   'Registration/register.html',
                   {'user_form': user_form})
+
+
+# Create a view that allows user to edit delivery preferences
+from .forms import DeliveryEditForm
+
+
+@login_required
+def editDeliveryPref(request):
+    if request.method == 'POST':
+        profile_form = DeliveryEditForm(
+            instance=request.user.profile,
+            data=request.POST,
+            files=request.FILES)
+        if profile_form.is_valid():
+            profile_form.save()
+            messages.success(request, 'Delivery Preferences Updated '
+                                      'successfully')
+            return render(request, 'account/base.html')
+        else:
+            messages.error(request, 'Error updating your delivery preferences')
+    else:
+        profile_form = DeliveryEditForm(
+            instance=request.user.profile)
+    return render(request,
+                  'account/edit_delivery.html',
+                  {
+                      'profile_form': profile_form})
